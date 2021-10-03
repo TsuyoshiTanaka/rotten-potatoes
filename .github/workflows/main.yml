@@ -24,9 +24,9 @@ jobs:
           context: ./src
           file: ./src/Dockerfile
           push: true
-          tags: |
-            edsontanaka/rotten-potatoes:latest
-            edsontanaka/rotten-potatoes:${{ github.run_number }}
+          repository: edsontanaka/rotten-potatoes
+          tags: ${{ github.run_number }}, latest
+            
 
   CD:
     needs: [CI]
