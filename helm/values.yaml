@@ -1,0 +1,11 @@
+web:
+  imageName: edsontanaka/rotten-potatoes
+  imageTag: v1
+  service:
+    type: NodePort
+    nodePort: 30000
+
+mongodb:
+  imageTag: 4.4.6
+  user: mongodbuser
+  password: mongodbpwd

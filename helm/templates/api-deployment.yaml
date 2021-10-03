@@ -1,0 +1,32 @@
+# Deploy do aplicação
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}-web
+  labels:
+    app: {{ .Chart.Name }}-{{ .Release.Name }}-web
+spec:
+  selector:
+    matchLabels:
+      app: {{ .Chart.Name }}-{{ .Release.Name }}-web
+  template:
+    metadata:
+      labels:
+        app: {{ .Chart.Name }}-{{ .Release.Name }}-web
+    spec:
+      containers:
+      - name: web
+        image: {{ .Values.web.imageName }}:{{ .Values.web.imageTag }}
+        ports:
+          - containerPort: 5000
+        env:
+          - name: MONGODB_DB
+            value: "admin"
+          - name: MONGODB_HOST
+            value: {{ .Release.Name }}-mongodb
+          - name: MONGODB_PORT
+            value: "27017"
+          - name: MONGODB_USERNAME
+            value: {{ .Values.mongodb.user }}
+          - name: MONGODB_PASSWORD
+            value: {{ .Values.mongodb.password }}
